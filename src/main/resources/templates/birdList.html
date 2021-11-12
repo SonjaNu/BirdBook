@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<title>Lintubongauskirja</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" /> 
+</head>
+<body>
+
+<div class="col-md-6" style="padding:20px 0">
+<p th:inline="text">Tervetuloa [[${#httpServletRequest.remoteUser}]]</p>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+		</form>
+		
+		
+		
+	
+	</div>
+	
+
+	<h1>Lintubongauskirja</h1>
+	
+	
+	</br>
+	
+	<div class="container">
+	
+	
+	<div class="col-md-7" style="padding:20px 0">
+	 <a class="btn btn-success" href="/addfinding" >Lisää uusi havainto</a> 
+	 <a class="btn btn-success" href="/add" >Lisää lintu listaan</a> 
+	 <a class="btn btn-success" href="/categorylist" >Lisää lintulaji lajilistaan</a> 
+	
+	</div>
+
+	<table class="table table-striped">
+	
+		<tr>
+			<th>Nimi</th>
+			<th>Levinneisyys</th>
+			<th>Harvinaisuus</th>			
+			<th>Laji</th>
+		
+			<th sec:authorize="hasRole('ADMIN')"> </th>
+		
+
+		<tr th:each="bird : ${birds}">
+			<td th:text="${bird.name}">nimi</td>
+			<td th:text="${bird.distribution}">levinneisyys</td>
+			<td th:text="${bird.rarity}">harvinaisuus</td>
+			<td th:text="${bird.category.name}">laji</td>
+		      
+		<!--    	<td th:text="${bird.finding.date}">havaintoaika</td>
+		<td th:text="${bird.finding.place}">havaintopaikka</td>
+			<td th:text="${bird.finding.count}">havaintomäärä</td>   -->
+			
+		   	<td><a class="btn btn-success" th:href="@{/findinglist/{id}(id=${bird.id})}">Katso havainnot</a></td> 
+		
+			<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${bird.id})}">Muokkaa</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${bird.id})}" class="btn btn-xs btn-danger">Poista</a></td>
+		
+		
+		</tr>
+		
+	</table>
+	
+	
+	 
+	
+</div> 
+</body>
+</html>

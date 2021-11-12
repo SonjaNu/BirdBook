@@ -1,4 +1,4 @@
-package palvelinohjelmointi.Bookstore.domain;
+package palvelinohjelmointi.BirdWatchingBook.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

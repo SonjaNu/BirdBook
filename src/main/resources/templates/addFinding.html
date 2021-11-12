@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Havainnon lisääminen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" /> 
+</head>
+<body>
+	<h2>Lisää havainto</h2>
+	</br>
+		
+	<div>
+	<form th:object="${finding}" th:action="@{/savefinding}" action="#" method="post"> <!-- Tarkoitus olla yhteys findingControlleriin -->
+			
+			<!--  <label for="bird">Linnun nimi</label>   -->
+			
+			
+		
+				</br>
+		
+		  	<label for="name">Havaintopaikka</label>
+			<input type="text" id="place" th:field="*{place}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="distribution">Havaintoaika&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input type="text" id="date" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="rarity">Havaintomäärä</label>
+			<input type="text" id="count" th:field="*{count}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<select id="bird" th:field="*{bird}" class="form-control">  <!-- bird, koska se viittaa Finding-luokan attribuuttiin private Bird bird; -->
+ 			 <option th:each="bird: ${birds}"      
+ 			 th:value="${bird.id}"
+  			  th:text="${bird.name}"></option>	<!-- ${birds} viittaa FindingController-luokan metodiin (/addfinding) hakusanaan birds  -->
+			</select>
+	
+	</br> </br>
+			
+			
+			
+			 <a class="btn btn-success" href="/birdlist" >Takaisin lintulistaan</a> 
+			 <input class="btn btn-success" type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+</body>
+</html>

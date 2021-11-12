@@ -1,0 +1,51 @@
+ <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<title>BirdWatchingBook</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" /> 
+</head>
+<body>
+	<h2>Havainnot</h2>
+	</br>
+	
+ 	<div class="container">
+	
+
+
+	<table class="table table-striped">
+	
+		<tr>
+			<th>Havaintoaika</th>
+			<th>Havaintopaikka</th>
+			<th>Havaintomäärä</th>
+		
+			<th sec:authorize="hasRole('ADMIN')"> </th>
+		</tr>
+		
+	
+<tr>
+	
+		<tr th:each="finding : ${findings}">
+			<td th:text="${finding.date}">aika</td>
+			<td th:text="${finding.place}">paikka</td>
+			<td th:text="${finding.count}">määrä</td>
+
+			
+
+	  	<td><a class="btn btn-success" th:href="@{/editfinding/{id}(id=${finding.findingId})}">Muokkaa</a></td>  
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletefinding/{id}(id=${finding.findingId})}" class="btn btn-xs btn-danger">Poista</a></td> 
+				
+		</tr>
+		
+	</table>
+	
+	
+	 <a class="btn btn-success" href="/birdlist" >Palaa lintulistaan</a> 
+	
+	 
+	
+ </div>  
+</body>
+</html> 

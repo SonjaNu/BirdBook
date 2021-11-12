@@ -1,18 +1,18 @@
-package palvelinohjelmointi.Bookstore.web;
-
-
-
-
+package palvelinohjelmointi.BirdWatchingBook.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import palvelinohjelmointi.Bookstore.domain.Category;
 
-import palvelinohjelmointi.Bookstore.domain.CategoryRepository;
+import palvelinohjelmointi.BirdWatchingBook.domain.Category;
+import palvelinohjelmointi.BirdWatchingBook.domain.CategoryRepository;
+
 
 @Controller
 public class CategoryController {
@@ -30,6 +30,7 @@ return "categoryList";
 
 }
 	
+	
 	 @RequestMapping(value = "/savecategory", method = RequestMethod.POST)
 	    public String save(@ModelAttribute Category category){
 	        categoryRepository.save(category);
@@ -40,5 +41,13 @@ return "categoryList";
 	    public String addCategory(Model model){
 	    	model.addAttribute("category", new Category());
 	        return "addCategory";
-	    }   
+	    }  
+	 
+	 @PreAuthorize(value = "hasAuthority('ADMIN')") //kuka saa suorittaa havainnon poiston eli roolin on oltava Admin
+	 @RequestMapping(value = "/deletecategory/{id}", method = RequestMethod.GET)
+	    public String deleteCategory(@PathVariable("id") Long categoryId, Model model) {
+	    	categoryRepository.deleteById(categoryId);
+	    	
+	    	return "redirect:../categorylist";
+	    } 
 }

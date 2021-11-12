@@ -1,6 +1,7 @@
-package palvelinohjelmointi.Bookstore;
+package palvelinohjelmointi.BirdWatchingBook;
 
 import java.util.ArrayList;
+
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import palvelinohjelmointi.Bookstore.web.UserDetailServiceImpl;
+import palvelinohjelmointi.BirdWatchingBook.web.UserDetailServiceImpl;
 
 
 @Configuration
@@ -33,11 +34,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        http
 	        .authorizeRequests().antMatchers("/css/").permitAll() // Enable css when logged out
 	        .and()
+	        .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+	        .and()
+	        .csrf().ignoringAntMatchers("/h2-console/**")
+	        .and()
+	        .headers().frameOptions().sameOrigin()
+	        .and()
 	        .authorizeRequests().anyRequest().authenticated()
 	        .and()
 	      .formLogin()
 	      	.loginPage("/login")
-	      	.defaultSuccessUrl("/booklist", true)
+	      	.defaultSuccessUrl("/birdlist", true)
 	      	.permitAll()
           .and()
       .logout()

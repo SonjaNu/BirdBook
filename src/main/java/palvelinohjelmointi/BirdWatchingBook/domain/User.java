@@ -1,4 +1,4 @@
-package palvelinohjelmointi.Bookstore.domain;
+package palvelinohjelmointi.BirdWatchingBook.domain;
 import javax.persistence.*;
 
 @Entity

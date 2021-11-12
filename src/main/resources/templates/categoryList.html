@@ -3,26 +3,26 @@
 <head>
 <title>Categories of the Books</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" /> 
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" /> 
 </head>
 <body>
-	<h1>Book Categories</h1>
+	<h2>Lintulajit</h2>
 	
-	<table class="table table-striped">
+	</br>
 	
-		<tr>
-			<th>Category</th>
+	<table class="table tablecategories">
+	
 		
-		</tr>
 
 		<tr th:each="category : ${categories}">
 			<td th:text="${category.name}">Category</td>
 		
-			
+			 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletecategory/{id}(id=${category.categoryId})}" class="btn btn-xs btn-danger">Poista</a></td>
 		</tr>
 	</table>
 	
-	 <a class="btn btn-success" href="/addcategory" >Add Category</a> 
+	 <a class="btn btn-success" href="/addcategory" >Lisää lintulaji</a> 
+	  <a class="btn btn-success" href="/birdlist" >Palaa etusivulle</a> 
 	
 
 </body>

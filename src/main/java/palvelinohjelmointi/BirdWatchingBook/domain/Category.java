@@ -1,11 +1,8 @@
-package palvelinohjelmointi.Bookstore.domain;
+package palvelinohjelmointi.BirdWatchingBook.domain;
 
 import javax.persistence.Entity;
 
-
-
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import palvelinohjelmointi.Bookstore.domain.Book;
+import palvelinohjelmointi.BirdWatchingBook.domain.Bird;
 
 
 
@@ -30,7 +27,7 @@ public class Category {
 		
 		@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 		@JsonIgnoreProperties("category")
-		private List<Book> books;
+		private List<Bird> birds;
 		
 		
 public Category() {}
@@ -61,12 +58,12 @@ public void setName(String name) {
 	this.name = name;
 }
 
-public List<Book> getBooks() {
-	return books;
+public List<Bird> getBirds() {
+	return birds;
 }
 
-public void setStudents(List<Book> books) {
-	this.books = books;
+public void setBirds(List<Bird> birds) {
+	this.birds = birds;
 }
 
 

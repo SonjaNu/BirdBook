@@ -1,4 +1,4 @@
-package palvelinohjelmointi.Bookstore.web;
+package palvelinohjelmointi.BirdWatchingBook.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import palvelinohjelmointi.Bookstore.domain.User;
-import palvelinohjelmointi.Bookstore.domain.UserRepository;
+import palvelinohjelmointi.BirdWatchingBook.domain.User;
+import palvelinohjelmointi.BirdWatchingBook.domain.UserRepository;
 
 
 @Service
