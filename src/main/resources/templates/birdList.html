@@ -9,18 +9,24 @@
 <body>
 
 <div class="col-md-6" style="padding:20px 0">
-<p th:inline="text">Tervetuloa [[${#httpServletRequest.remoteUser}]]</p>
+<p th:inline="text">  <span th:text="#{welcome}"></span> [[${#httpServletRequest.remoteUser}]]</p>    <!-- welcome on avainsana, joka löytyy res.properties-tiedostoista -->
+ <br> 
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+
+			</form>
+			</br>
+			<form>
+			<!-- nappulat kielen vaihtamista varten, avainsanat switch-fi ja switch-en, ohje osoitteeseen, 
+			päätteen perusteella hakee properties-tiedostoista käytettävät sanat -->
+			    <button type="button" th:text="#{switch-fi}" onclick="window.location.href='http://localhost:8080/birdlist?localeData=fi'"></button>
+    			<button type="button" th:text="#{switch-en}" onclick="window.location.href='http://localhost:8080/birdlist?localeData=en'"></button> 
+				
 		</form>
-		
-		
-		
-	
+
 	</div>
 	
-
-	<h1>Lintubongauskirja</h1>
+	<h1 th:text="#{birdwatchingbook}"></h1>
 	
 	
 	</br>
@@ -31,7 +37,7 @@
 	<div class="col-md-7" style="padding:20px 0">
 	 <a class="btn btn-success" href="/addfinding" >Lisää uusi havainto</a> 
 	 <a class="btn btn-success" href="/add" >Lisää lintu listaan</a> 
-	 <a class="btn btn-success" href="/categorylist" >Lisää lintulaji lajilistaan</a> 
+	 <a class="btn btn-success" href="/categorylist" >Hallinnoi lintulajeja</a> 
 	
 	</div>
 
@@ -40,7 +46,7 @@
 		<tr>
 			<th>Nimi</th>
 			<th>Levinneisyys</th>
-			<th>Harvinaisuus</th>			
+			<th>Huomioita</th>			
 			<th>Laji</th>
 		
 			<th sec:authorize="hasRole('ADMIN')"> </th>
@@ -52,9 +58,6 @@
 			<td th:text="${bird.rarity}">harvinaisuus</td>
 			<td th:text="${bird.category.name}">laji</td>
 		      
-		<!--    	<td th:text="${bird.finding.date}">havaintoaika</td>
-		<td th:text="${bird.finding.place}">havaintopaikka</td>
-			<td th:text="${bird.finding.count}">havaintomäärä</td>   -->
 			
 		   	<td><a class="btn btn-success" th:href="@{/findinglist/{id}(id=${bird.id})}">Katso havainnot</a></td> 
 		
@@ -62,13 +65,8 @@
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${bird.id})}" class="btn btn-xs btn-danger">Poista</a></td>
 		
 		
-		</tr>
-		
+		</tr>		
 	</table>
-	
-	
-	 
-	
 </div> 
 </body>
 </html>

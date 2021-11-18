@@ -2,15 +2,11 @@ package palvelinohjelmointi.BirdWatchingBook.domain;
 
 import javax.persistence.Entity;
 
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import palvelinohjelmointi.BirdWatchingBook.domain.Bird;
@@ -27,10 +23,10 @@ import palvelinohjelmointi.BirdWatchingBook.domain.Bird;
 	
 
 			@ManyToOne  
-			    //many on Bird-luokka ja One on Category (private Category category;) (One on lähin alla oleva attribuutti)
+			    //many on Finding-luokka ja one on Bird
 			 @JsonIgnoreProperties ("finding")    
 			 @JoinColumn(name = "id") //viiteavaimena linnun id 
-			 	private Bird bird; // tämä on addFinding -templatessa th:field="*{bird}"
+			 	private Bird bird; // addFinding -templatessa th:field="*{bird}"
 			
 			
 	public Finding() {}

@@ -8,22 +8,17 @@
 <body>
 	<h2>Lintulajit</h2>
 	
-	</br>
-	
+	</br>	
 	<table class="table tablecategories">
-	
-		
 
 		<tr th:each="category : ${categories}">
 			<td th:text="${category.name}">Category</td>
-		
-			 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletecategory/{id}(id=${category.categoryId})}" class="btn btn-xs btn-danger">Poista</a></td>
+			 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editcategory/{id}(id=${category.categoryId})}" class="btn btn-success">Muokkaa</a></td>
 		</tr>
 	</table>
 	
 	 <a class="btn btn-success" href="/addcategory" >Lisää lintulaji</a> 
 	  <a class="btn btn-success" href="/birdlist" >Palaa etusivulle</a> 
 	
-
 </body>
 </html>

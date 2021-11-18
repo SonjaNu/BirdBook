@@ -10,14 +10,9 @@
 	</br>
 		
 	<div>
-	<form th:object="${finding}" th:action="@{/savefinding}" action="#" method="post"> <!-- Tarkoitus olla yhteys findingControlleriin -->
+	<form th:object="${finding}" th:action="@{/savefinding}" action="#" method="post">
 			
-			<!--  <label for="bird">Linnun nimi</label>   -->
-			
-			
-		
-				</br>
-		
+			</br>
 		  	<label for="name">Havaintopaikka</label>
 			<input type="text" id="place" th:field="*{place}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
@@ -33,11 +28,8 @@
  			 th:value="${bird.id}"
   			  th:text="${bird.name}"></option>	<!-- ${birds} viittaa FindingController-luokan metodiin (/addfinding) hakusanaan birds  -->
 			</select>
-	
-	</br> </br>
-			
-			
-			
+
+			 </br> </br>
 			 <a class="btn btn-success" href="/birdlist" >Takaisin lintulistaan</a> 
 			 <input class="btn btn-success" type="submit" value="Tallenna"></input>
 		</form>

@@ -1,7 +1,5 @@
 package palvelinohjelmointi.BirdWatchingBook.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -29,33 +27,19 @@ public class FindingController {
 	
 	@RequestMapping(value = "/findinglist/{id}", method = RequestMethod.GET)
 	
-	 public String viewFindings(@PathVariable("id") long birdId, Model model) {
-		
+	 public String viewFindings(@PathVariable("id") long birdId, Model model) {		
 		Bird bird = new Bird();  //luodaan uusi lintu-olio
 		bird.setId(birdId);		//ja asetataan siihen linnun id (birdId)
 		model.addAttribute("findings", findingRepository.findByBird(bird));  //haetaan findingRepositorysta komennolla findByBird(bird), jossa parametriin on nyt asetettu linnun id
 		//findingRepositoryssä luotiin erikseen komento List<Finding> findByBird(Bird bird);
-		
-		
-		
-		
-	//	model.addAttribute("findings", findingRepository.findAll()); //Haen kaikki tiedot findingRepositorysta ja templatessa findingsByBird
-	//	olisi tarkoitus käydä ne läpi th:each  th:if  rakenteilla
-		
-		// hae findingRepositorysta birdId:lla findingssit ?? 
-		//	     model.addAttribute("findings", findingRepository.findById(birdId).get());
-	//	 model.addAttribute("findings", findingRepository.findAllById(birdId).get());
-		//tarkoituksena on hakea birdId:llä findingRepositorysta kaikki havainnot, joissa on kyseinen lintuId.
-		//Sitten nämä listataan findingsByBird -templatessa
-		//pitää ilmoittaa repositorylle, että etsitään birdId:llä eikä findingId:llä
 	     return "findingsByBird";
 	 }
 	
 
 	 @RequestMapping(value = "/savefinding", method = RequestMethod.POST)
-	    public String saveFinding( @ModelAttribute Finding finding){	//******** @PathVariable("id") long id,
+	    public String saveFinding( @ModelAttribute Finding finding){	
 		 findingRepository.save(finding);
-	        return "redirect:/birdlist";  //*************pitäisi ohjata endpointtiin /findinglist{id}, mutta ei toimi, ei löytäne id:tä...******************
+	        return "redirect:/birdlist";  
 	    } 
 	
 	 @RequestMapping(value = "/addfinding")
@@ -65,18 +49,17 @@ public class FindingController {
 	        return "addFinding";
 	    }   
 	 
+	 @PreAuthorize(value = "hasAuthority('ADMIN')") // roolin on oltava Admin
 	 @RequestMapping(value = "/editfinding/{id}", method = RequestMethod.GET)
 	 public String editFinding(@PathVariable("id") long findingId, Model model) {
 	     model.addAttribute("finding", findingRepository.findById(findingId).get());
-	
 	     return "editFinding";
 	   //jos havainnon id on 0 tai null, se tekee sql insertin, muuten se tekee sql updaten
 		 
 	 }	
 	 
 	 
-	 
-	 @PreAuthorize(value = "hasAuthority('ADMIN')") //kuka saa suorittaa havainnon poiston eli roolin on oltava Admin
+	 @PreAuthorize(value = "hasAuthority('ADMIN')") // roolin on oltava Admin
 	 @RequestMapping(value = "/deletefinding/{id}", method = RequestMethod.GET)
 	    public String deleteFinding(@PathVariable("id") Long findingId, Model model) {
 	    	findingRepository.deleteById(findingId);

@@ -10,7 +10,6 @@
 	<div>
 		<form th:object="${finding}" th:action="@{/savefinding}" action="#" method="post">
 			<label for="findingId"></label>
-			<!--   <input type="hidden" id="id" th:field="${id}" /> -->
 		    <input th:value="*{findingId}" type="hidden" id="id" th:field="*{findingId}"  />
 			
 		  	<label for="date">Aika</label>
@@ -21,11 +20,8 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<label for="count">Määrä</label>
 			<input type="text" id="count" th:field="*{count}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			
-			<input type="hidden" id="id" th:field="*{bird.id}" />
-			
-			
+			<div style="clear: both; display: block; height: 10px;"></div>			
+			<input type="hidden" id="id" th:field="*{bird.id}" />			
 			<input type="submit" value="Save"></input>
 		</form>
 	</div>

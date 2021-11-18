@@ -21,16 +21,13 @@ public class CategoryController {
 	private CategoryRepository categoryRepository;
 	
 	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
-	
 	public String categoryList(Model model) {
+		model.addAttribute("categories", categoryRepository.findAll()); 
+		return "categoryList";
 
-	model.addAttribute("categories", categoryRepository.findAll()); 
-
-return "categoryList";
-
-}
+	}
 	
-	
+
 	 @RequestMapping(value = "/savecategory", method = RequestMethod.POST)
 	    public String save(@ModelAttribute Category category){
 	        categoryRepository.save(category);
@@ -43,7 +40,14 @@ return "categoryList";
 	        return "addCategory";
 	    }  
 	 
-	 @PreAuthorize(value = "hasAuthority('ADMIN')") //kuka saa suorittaa havainnon poiston eli roolin on oltava Admin
+	 @RequestMapping(value = "/editcategory/{id}", method = RequestMethod.GET)
+	 public String editBird(@PathVariable("id") long categoryId, Model model) {
+	     model.addAttribute("category", categoryRepository.findById(categoryId).get());
+	   //  model.addAttribute("categories", categoryRepository.findAll());
+	     return "editCategory";
+	 }	
+	 
+	 @PreAuthorize(value = "hasAuthority('ADMIN')") //kuka saa suorittaa categoryn poiston eli roolin on oltava Admin
 	 @RequestMapping(value = "/deletecategory/{id}", method = RequestMethod.GET)
 	    public String deleteCategory(@PathVariable("id") Long categoryId, Model model) {
 	    	categoryRepository.deleteById(categoryId);

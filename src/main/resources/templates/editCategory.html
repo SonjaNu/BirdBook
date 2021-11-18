@@ -3,26 +3,25 @@
 <head>
     <title>Lajin lisääminen</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" /> 
+       <link type="text/css" rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" /> 
 </head>
 <body>
-	<h2>Lisää lintulaji</h2>
-	
+	<h2>Muokkaa lintulajin nimeä</h2>	
 	</br>
 		
 	<div>
 
 		<form th:object="${category}" th:action="@{/savecategory}" action="#" method="post">
+		  	<label for="id"></label>
+		  	<input th:value="*{categoryId}" type="hidden" id="id" th:field="*{categoryId}"  />
 		  	<label for="name">Lintulaji</label>
 			<input type="text" id="name" th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	
-		  			<a class="btn btn-success" href="/birdlist" >Takaisin lintulistaan</a> 
+		  	<a class="btn btn-success" href="/categorylist" >Takaisin lintulistaan</a> 
 			<input class="btn btn-success" type="submit" value="Tallenna"></input>
-	
+
 		</form>
 	</div>
-	
-	
 </body>
 </html>

@@ -1,19 +1,15 @@
 package palvelinohjelmointi.BirdWatchingBook.domain;
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 import palvelinohjelmointi.BirdWatchingBook.domain.Category;
 import palvelinohjelmointi.BirdWatchingBook.domain.Finding;
@@ -27,13 +23,14 @@ public class Bird {
 	private String distribution;
 	private String rarity;
 	
-
-	 @OneToMany(cascade = CascadeType.ALL, mappedBy = "bird")
+		
+	 @OneToMany(cascade = CascadeType.ALL, mappedBy = "bird") //one on Bird-luokka ja meny Finding
 		@JsonIgnoreProperties("bird")
 		private List<Finding> finding;
 	
 	 @ManyToOne  //yhteystyyppi kahden tietokantataulun välillä
-	    //many on Bird-luokka ja One on Category (private Category category;) (One on lähin alla oleva attribuutti)
+	    		//many on Bird-luokka ja One on Category (private Category category;) 
+	 			//One on lähin alla oleva attribuutti
 	 @JsonIgnoreProperties ("bird")    
 	 @JoinColumn(name = "categoryId") //FK, viiteavain-attribuutin (viiteavainsarakkeen) nimi on categoryId
 	    private Category category;
